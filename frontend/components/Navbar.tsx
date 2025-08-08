@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -19,7 +19,10 @@ import { useCartStore } from '@/store/useCartStore';
 const Navbar: React.FC = () => {
   const { user, logout, isAuthenticated } = useAuth();
   const router = useRouter();
-  const {getCartLength} =useCartStore();
+  const { getCartLength } = useCartStore();
+
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const handleLogout = () => {
     logout();
     router.push('/login');
@@ -29,6 +32,7 @@ const Navbar: React.FC = () => {
     <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
+          {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
               <Package className="h-8 w-8 text-[#0066DA]" />
@@ -36,13 +40,15 @@ const Navbar: React.FC = () => {
             </Link>
           </div>
 
+          {/* Desktop Nav */}
           <nav className="hidden md:flex space-x-8">
             <Link href="/" className="text-gray-700 hover:text-[#0066DA] transition-colors">Home</Link>
             <Link href="/products" className="text-gray-700 hover:text-[#0066DA] transition-colors">Products</Link>
-            <Link href="/#about" className="text-gray-700 hover:text-[#0066DA] transition-colors">About</Link>
-            <Link href="/#contact" className="text-gray-700 hover:text-[#0066DA] transition-colors">Contact</Link>
+            <Link href="/about" className="text-gray-700 hover:text-[#0066DA] transition-colors">About</Link>
+            <Link href="/contact" className="text-gray-700 hover:text-[#0066DA] transition-colors">Contact</Link>
           </nav>
 
+          {/* Right Side Buttons */}
           <div className="flex items-center space-x-4">
             {isAuthenticated && user?.role === 'user' && (
               <Link href="/cart" className="relative">
@@ -93,7 +99,7 @@ const Navbar: React.FC = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <div className="flex items-center space-x-2">
+              <div className="hidden md:flex items-center space-x-2">
                 <Button variant="outline" asChild>
                   <Link href="/login">Login</Link>
                 </Button>
@@ -102,8 +108,56 @@ const Navbar: React.FC = () => {
                 </Button>
               </div>
             )}
+
+            {/* Hamburger Icon (mobile only) */}
+            <div className="md:hidden">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsMobileMenuOpen(prev => !prev)}
+                aria-label="Toggle Menu"
+              >
+                <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </Button>
+            </div>
           </div>
         </div>
+
+        {/* Mobile Dropdown Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden mt-2 space-y-2 px-4 pb-4 bg-white border rounded shadow-md absolute right-4 top-16 z-50 w-40">
+            <Link
+              href="/"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
+            >
+              Home
+            </Link>
+            <Link
+              href="/products"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
+            >
+              Products
+            </Link>
+            <Link
+              href="/about"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
+            >
+              About
+            </Link>
+            <Link
+              href="/contact"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
+            >
+              Contact
+            </Link>
+          </div>
+        )}
       </div>
     </header>
   );

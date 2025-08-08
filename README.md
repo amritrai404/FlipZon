@@ -60,4 +60,4 @@ A full-featured e-commerce website built with the MERN stack (MongoDB, Express.j
 
 ## 🔗 Live Demo
 
-👉 [link missing]
+👉 [https://amrit-flipzon.netlify.app]

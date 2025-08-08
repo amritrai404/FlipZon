@@ -3,13 +3,11 @@ import mongoose from 'mongoose';
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI, {
-      ssl: true,                      // SSL enable karte hain explicitly
-      // Deprecated options hata diye jaise useNewUrlParser, useUnifiedTopology
-      tlsAllowInvalidCertificates: false, // Production mein false rakhna, debugging ke liye true kar sakte hain
+      tls: true,
     });
-    console.log("MongoDB Connected");
-  } catch (error) {
-    console.error("MongoDB Connection Error:", error);
+    console.log('✅ MongoDB Connected');
+  } catch (err) {
+    console.error('❌ MongoDB Connection Failed:', err.message);
     process.exit(1);
   }
 };

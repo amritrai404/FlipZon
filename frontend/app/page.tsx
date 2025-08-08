@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import AboutPage from '@/components/About';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import ProductShowcase from '@/components/PorductShowCase';
 
 
 const Home: React.FC = () => {
@@ -52,8 +53,7 @@ const Home: React.FC = () => {
           </div>
         </section>
       </main>
-
-      <AboutPage />
+    <ProductShowcase />
     </div>
   );
 };

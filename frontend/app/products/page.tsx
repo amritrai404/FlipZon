@@ -1,9 +1,6 @@
-// app/products/page.tsx
 'use client';
-
 import React, { useEffect, useState } from 'react';
 import ProductCard from '@/components/ProductCard';
-import { Product } from '@/types';
 import axios from '@/lib/axios';
 import { Loader2 } from 'lucide-react';
 
@@ -11,8 +8,8 @@ const slugify = (text: string) =>
   text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
 
 const ProductPage = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -25,7 +22,6 @@ const ProductPage = () => {
         setLoading(false);
       }
     };
-
     fetchProducts();
   }, []);
 
@@ -41,10 +37,8 @@ const ProductPage = () => {
         ) : (
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {products.map((product) => {
-               const slug = slugify(product.title);
-              return (
-                <ProductCard key={product._id} product={product} slug={slug} />
-              );
+              const slug = slugify(product.title);
+              return <ProductCard key={product._id} product={product} slug={slug} />;
             })}
           </div>
         )}

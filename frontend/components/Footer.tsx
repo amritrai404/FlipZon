@@ -62,9 +62,9 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
             <p className="text-gray-400 text-sm sm:text-base">
-              Email: support@flipzon.com<br />
-              Phone: +91 98765 43210<br />
-              Location: Mumbai, India
+              Email: help@flipzon.com<br />
+              Phone: +91 96967 82522<br />
+              Location: Prayagraj, India
             </p>
           </div>
         </div>

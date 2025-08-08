@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -37,14 +36,23 @@ const products = [
         bg: 'bg-black',
         text: 'text-white',
     },
-
-
-
 ];
 
 export default function ProductShowcase() {
     return (
         <section className="w-full px-4 sm:px-6 lg:px-8 py-12">
+            {/* Text Section Above Products */}
+            <div className="max-w-4xl mx-auto text-center mb-12">
+                <h2 className="text-4xl font-extrabold mb-4">Featured Products</h2>
+                <p className="text-lg text-gray-600 mb-2">
+                    Discover our top picks for quality and value. Curated just for you.
+                </p>
+                <p className="text-gray-500">
+                    At FlipZon, we bring you the latest gadgets and essentials at unbeatable prices. Check out our most popular products below.
+                </p>
+            </div>
+
+            {/* Products Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {products.map((product, idx) => (
                     <div
@@ -52,9 +60,8 @@ export default function ProductShowcase() {
                         className={`rounded-xl overflow-hidden md:mb-20 border-2 border-white hover:bg-white hover:text-black shadow-md transition-transform hover:scale-[1.01] ${product.bg} ${product.text} flex flex-col`}
                     >
                         <div className="p-6 flex flex-col justify-center flex-1">
-                            <h2 className="text-2xl font-semibold mb-2">{product.title}</h2>
+                            <h3 className="text-2xl font-semibold mb-2">{product.title}</h3>
                             <p className="text-sm mb-4">{product.description}</p>
-
                         </div>
 
                         {product.image && (
@@ -73,13 +80,13 @@ export default function ProductShowcase() {
                 ))}
             </div>
 
+            {/* View All Products Button */}
             <div className="mt-10 text-center">
                 <Button
                     size="lg"
                     variant="ghost"
                     className="text-lg px-8 py-3 bg-white hover:bg-[#0066DA] text-black hover:text-white transition-colors shadow-md"
                 >
-
                     <Link
                         href="/products"
                         className="inline-flex items-center gap-2"
